@@ -1,0 +1,225 @@
+from random import randint
+import math
+
+#Item Name List
+item1name = "Plain Water"
+item2name = "Red Bull"
+item3name = "Potato Chips"
+item4name = "Snickers"
+item5name = "Mini Chips"
+#End of Item Name List
+#Item Price
+item1price = float(0.90)
+item2price = float(1.50)
+item3price = float(1.40)
+item4price = float(1.20)
+item5price = float(0.60)
+#End of Item Price
+#Item Stock
+item1stock = int(3)
+item2stock = int(4)
+item3stock = int(2)
+item4stock = int(1)
+item5stock = int(6)
+#End of Item Stock
+#Cash Stored
+cashstored = float(0)
+#End of CashStored
+#OOS Error Message
+ooserror = ("Item is OUT OF STOCK")
+#Start of Program
+while True:
+#RNG Number
+    rng = randint(1,20)
+    #Menu
+    print("")
+    print(rng)
+    print("_____________Menu_____________")
+    print("______________________________")
+    print("")
+    print("1:   {f1}({f3})      ${f2:.2f}    ".format(f1 = item1name ,f2 = item1price , f3 = item1stock))
+    print("2:   {f1}({f3})         ${f2:.2f}    ".format(f1 = item2name ,f2 = item2price , f3 = item2stock))
+    print("3:   {f1}({f3})     ${f2:.2f}    ".format(f1 = item3name ,f2 = item3price , f3 = item3stock))
+    print("4:   {f1}({f3})         ${f2:.2f}    ".format(f1 = item4name ,f2 = item4price , f3 = item4stock))
+    print("5:   {f1}({f3})       ${f2:.2f}    ".format(f1 = item5name ,f2 = item5price , f3 = item5stock))
+    print("")
+    print("______________________________")
+    print("0 to End")
+    #End Of Menu    
+
+
+    while True:
+        try:
+            userinput = int(input("Select an Item to Buy ! : "))
+        except ValueError:
+            print("Please input an option.")
+            continue
+        if userinput >6 : #Handle Invalid Options
+            print("Invalid Option")
+            continue #Returns to Start of loop
+            #If User Selects Option1
+        elif userinput == 1 and item1stock > 0:
+            print("You have Selected {f1}".format(f1 = item1name))
+            print("1 to Confirm , Random input to Cancel ")
+            try: 
+                confirmation = int(input("Confirm Selection : "))
+            except ValueError:  #Checks alphabets inputs will reset loop
+                print("Order Cancelled")
+                continue
+            if confirmation == 1: 
+                print("Please pay ${f1:.2f}".format(f1= item1price))
+                itemselectedprice = item1price #Selected Item Price 
+                itemname = item1name #Select item Name
+                item1stock -= 1 #Item Stock -1
+                break #Break current loop to next loop
+            else:
+                print("Order Cancelled")
+                continue
+        elif userinput == 1 and item1stock == 0: #CHECK FOR STOCK
+            print(ooserror)
+            continue	    
+        #End of Option 1
+        #Start of Option 2
+        elif userinput == 2 and item2stock > 0: #Stock Check
+            print("You have Selected {f1}".format(f1 = item2name))
+            print("1 to Confirm , Random input to Cancel ")
+            try:
+                confirmation = int(input("Confirm Selection : "))
+            except ValueError:
+                print("Order Cancelled")
+                continue
+            if confirmation == 1:
+                print("Please pay ${f1:.2f}".format(f1= item2price))
+                itemselectedprice = item2price
+                itemname = item2name
+                item2stock -= 1
+                break
+            else:
+                print("Order Cancelled")
+                continue
+        elif userinput == 2 and item2stock == 0: #0 stock Trigger This
+            print(ooserror)#Error Message
+            continue
+        #End of option 2
+        #Start of Option 3
+        elif userinput == 3 and item3stock > 0:
+            print("You have Selected {f1}".format(f1 = item3name))
+            print("1 to Confirm , Random input to Cancel ")
+            try:
+                confirmation = int(input("Confirm Selection : "))
+            except ValueError:
+                print("Order Cancelled")
+                continue
+            if confirmation == 1:
+                print("Please pay ${f1:.2f}".format(f1= item3price))
+                itemselectedprice = item3price
+                itemname = item3name
+                item3stock -= 1
+                break
+            elif confirmation == 0:
+                print("Order Cancelled")
+                continue
+        elif userinput == 3 and item3stock == 0:
+            print(ooserror)
+            continue
+        #End of Option 3
+        #Start of Option 4
+        elif userinput == 4 and item4stock > 0:
+            print("You have Selected {f1}".format(f1 = item4name))
+            print("1 to Confirm , Random input to Cancel ")
+            try:
+                confirmation = int(input("Confirm Selection : "))
+            except ValueError:
+                print("Order Cancelled")
+                continue
+            if confirmation == 1:
+                print("Please pay ${f1:.2f}".format(f1= item4price))
+                itemselectedprice = item4price
+                itemname = item4name
+                item4stock -= 1
+                break
+            elif confirmation == 0:
+                print("Order Cancelled")
+                continue
+        elif userinput == 4 and item4stock == 0:
+            print(ooserror)
+            continue
+        #End of Option 4
+        #Start of Option 5
+        elif userinput == 5 and item5stock > 0:
+            print("You have Selected {f1}".format(f1 = item5name))
+            print("1 to Confirm , Random input to Cancel ")
+            try:
+                confirmation = int(input("Confirm Selection : "))
+            except ValueError:
+                print("Order Cancelled")
+                continue
+            if confirmation == 1:
+                print("Please pay ${f1:.2f}".format(f1= item5price))
+                itemselectedprice = item5price
+                itemname = item5name
+                item5stock -= 1
+                break
+            elif confirmation == 0:
+                print("Order Cancelled")
+                continue
+        elif userinput == 5 and item5stock == 0:
+            print(ooserror)
+            continue
+        #End of Option
+        elif userinput == 0:
+            exit()
+        else:
+            print("Please input a valid option")
+
+
+    while True:
+        try:
+            cashinput = float(input("Input Coin :"))
+        except ValueError:
+            print("Please input only $0.10 , $0.20 , $0.50 Or $1")
+            continue
+        if cashinput == 0.10 or cashinput == 0.20 or cashinput == 0.50 or cashinput == 1:
+                cashstored = round(cashstored + cashinput , 2)
+                print("$%.2f" %cashstored)
+                if cashstored > (itemselectedprice-0.01):
+                    cashstored = round(cashstored - itemselectedprice,2)
+                    print("Dispensing {f1}".format(f1 = itemname))
+                    if rng == 5 or rng == 8:
+                        print("{f1} is being dispensed".format(f1 = itemname))
+                        print("Your Product is Stuck.")
+                        print("Unlucky")
+                        break
+                    elif cashstored > 0.19 and cashstored <0.99:#if balance Exceeds 20c
+                        twentycentcoins = math.floor(cashstored / 0.20) #Math Explains:(0.90 / 0.20 = 4.5 , We dont want 4.5 so math.floor rounds down to 4
+                        twentycentdeduct = round(twentycentcoins * 0.20,2) #Caculate how much twenty cents coins amount to
+                        cashstored = round(cashstored-twentycentdeduct ,2) #remove all 20C coins from Balance
+                        print("Dispensing %d,20c Coins"%twentycentcoins) 
+                        if cashstored > 0.09: #If there is still a 10c , Trigger This
+                            cashstored = 0  #Restting Total Cash
+                            tencentcoin = 1
+                            print("Dispensing %d ,10c Coin"%tencentcoin)
+                            print("Thank you for buying!")
+                            break
+                        else:
+                            print("Thank you for buying!")
+                            break
+                    elif cashstored > 0.09 and cashstored < 0.19: #if balance exceeds 10c AND || is under 20c
+                        cashstored = 0
+                        tencentcoin = 1
+                        print("Dispensing %d , 10c Coin" %tencentcoin)
+                        print("Thank you for buying!")
+                        break
+                    elif cashstored < 0.09:
+                        print("Thank you for buying!")
+                        break
+                    else:
+                        print("Error Handle 1")
+                        break
+
+        else:
+            print("Please input only $0.10 , $0.20 , $0.50 Or $1")
+            
+
+
+
